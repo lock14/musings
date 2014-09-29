@@ -1,3 +1,5 @@
+package org.lock14.sudoku.backend;
+
 import java.util.Arrays;
 
 public abstract class Grid<T> {

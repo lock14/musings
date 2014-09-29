@@ -1,6 +1,9 @@
+package org.lock14.sudoku.display;
+
+import org.lock14.sudoku.backend.SudokuGrid;
+
 public class SudokuStdOutDisplayer implements SudokuDisplayer {
     public void display(SudokuGrid puzzle) {
-        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < SudokuGrid.BOARD_SIZE; i++) {
             if (i % 3 == 0) {
                 System.out.println(separator());

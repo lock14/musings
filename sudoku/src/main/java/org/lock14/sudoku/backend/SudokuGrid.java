@@ -1,3 +1,4 @@
+package org.lock14.sudoku.backend;
 
 public class SudokuGrid extends Grid<Integer> {
 	public static final int BOARD_SIZE = 9;
@@ -38,42 +39,7 @@ public class SudokuGrid extends Grid<Integer> {
 		}
 	}
 	
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < BOARD_SIZE; i++) {
-			if (i % 3 == 0) {
-				sb.append(separator());
-			}
-			for (int j = 0; j < BOARD_SIZE; j++) {
-				if (j % 3 == 0) {
-					sb.append("| ");
-				}
-				Integer cellValue = super.get(i * BOARD_SIZE + j);
-				if (cellValue != null) {
-					sb.append(cellValue);
-					sb.append(" ");
-				} else {
-					sb.append("- ");
-				}
-			}
-			sb.append("|\n");
-			
-		}
-		return sb.append(separator()).toString();
-	}
-	
-	private String separator() {
-		StringBuilder sb = new StringBuilder().append("+");
-		for (int i = 0; i < BOARD_SIZE / 3 ; i++) {
-			for (int j = 0; j < BOARD_SIZE - 2; j++) {
-				sb.append("-");
-			}
-			sb.append("+");
-		}
-		return sb.append("\n").toString();
-	}
-	
-    private boolean noConflicts(int cell, int value) {
+    public boolean noConflicts(int cell, int value) {
 		checkIfValidValue(value);
 		int column = cell % BOARD_SIZE;
 		int row = cell / BOARD_SIZE;
@@ -122,4 +88,4 @@ public class SudokuGrid extends Grid<Integer> {
 			throw new IllegalArgumentException("Invalid number: " + value);
 		}
 	}
-}/**/
+}

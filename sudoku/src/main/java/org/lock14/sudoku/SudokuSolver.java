@@ -1,6 +1,12 @@
+package org.lock14.sudoku;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+
+import org.lock14.sudoku.backend.SudokuGrid;
+import org.lock14.sudoku.display.SudokuDisplayer;
+import org.lock14.sudoku.display.SudokuStdOutDisplayer;
 
 public class SudokuSolver {
 	public static void main(String[] args) {
