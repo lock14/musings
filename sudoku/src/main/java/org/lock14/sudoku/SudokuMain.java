@@ -8,7 +8,7 @@ import org.lock14.sudoku.backend.SudokuGrid;
 import org.lock14.sudoku.display.SudokuDisplayer;
 import org.lock14.sudoku.display.SudokuStdOutDisplayer;
 
-public class SudokuSolver2 {
+public class SudokuMain {
     public static void main(String[] args) {
         try {
             parseOptions(args);
