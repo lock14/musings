@@ -25,7 +25,9 @@ public class ArrayStack<E> implements Stack<E> {
     }
 
     public void push(E data) {
-        checkSize();
+        if (size == stack.length) {
+            expandCapacity();
+        }
         stack[size++] = data;
     }
     
@@ -44,14 +46,11 @@ public class ArrayStack<E> implements Stack<E> {
         return s.append("]").toString();
     }
 
-    private void checkSize() {
-        if (size == stack.length) {
-            int newSize = stack.length + (stack.length / 2);
-            Object[] newStack = new Object[newSize];
-            for (int i = 0; i < stack.length; i++) {
-                newStack[i] = stack[i];
-            }
-            stack = newStack;
+    private void expandCapacity() {
+        Object[] newStack = new Object[stack.length + (stack.length / 2)];
+        for (int i = 0; i < size; i++) {
+            newStack[i] = stack[i];
         }
+        stack = newStack;
     }
 }
