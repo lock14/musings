@@ -17,10 +17,8 @@ public class ArrayStack<E> implements Stack<E> {
         if (isEmpty()) {
             return null;
         }
-        // actually want to null out references
-        // to avoid memory leaks
         E data = (E)stack[--size];
-        stack[size + 1] = null;
+        stack[size + 1] = null; // avoid memory leak
         return data;
     }
 
