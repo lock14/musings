@@ -1,7 +1,7 @@
 public class Rational implements Comparable<Rational> {
     public static final int IDENTITY_DENOMINATOR = 1;
-	private final int numerator;
-	private final int denominator;
+    private final int numerator;
+    private final int denominator;
     
     public Rational(String rational) throws NumberFormatException {
         this(Integer.parseInt(rational.trim().substring(0, 1)), 
@@ -23,8 +23,8 @@ public class Rational implements Comparable<Rational> {
             denominator /= numerator;
             numerator /= numerator;
         }
-		this.numerator = numerator;
-		this.denominator = denominator;
+        this.numerator = numerator;
+        this.denominator = denominator;
     }
 
     /**
@@ -84,7 +84,7 @@ public class Rational implements Comparable<Rational> {
     }
     
     /**
-     * Compares this Rational with the Specified Object for equality
+     * Compares two Rational object numerically
 	 * @param other Rational to which this Rational is to be compared
      *  
 	 * @return int < 0, 0, or int > 0 as this Rational is numerically less than, equal to, or greater than other
