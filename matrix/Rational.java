@@ -1,3 +1,13 @@
+/**
+ * Immutable object to represent rational numbers.
+ * Rational objects are always in reduced form.
+ * Rational objects always have denominator greater than 1.
+ * negative Rational objects are always represented with the numerator being negative.
+ * Currently no attempt to prevent integer overflow is made during arithmatic with Rationals.
+ *
+ * @author Brian Bechtel
+ * @version 1.0
+ */
 public class Rational implements Comparable<Rational> {
     public static final int IDENTITY_DENOMINATOR = 1;
     private final int numerator;
@@ -29,6 +39,15 @@ public class Rational implements Comparable<Rational> {
         }
         this.numerator = numerator;
         this.denominator = denominator;
+    }
+
+    /**
+     * Returns double form of this Rational
+     * 
+	 * @return decimal (i.e double) form of this Raitonal
+     **/
+    public double toDouble() {
+        return this.numerator / denominator;
     }
 
     /**
