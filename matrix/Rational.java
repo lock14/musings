@@ -105,6 +105,15 @@ public class Rational implements Comparable<Rational> {
     public String toString() {
         return "" + this.numerator + " / " + this.denominator;
     }
+    
+    /**
+     * returns the fraction syntax in latex of this Raional
+     *  
+	 * @return "\frac{a}{b}" where a is the numerator and b is the denominator of this Rational
+     **/
+    public String latexToString() {
+        return "\\frac{" + this.numerator + "}{" + this.denominator + "}";        
+    }
 
     private int gcd(int a, int b) {
         while (b != 0) {
