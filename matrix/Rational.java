@@ -93,7 +93,10 @@ public class Rational implements Comparable<Rational> {
         if (this.denominator == other.denominator) {
             return this.numerator - other.numerator;
         } else {
-            return -1;
+            int gcd = gcd(this.denominator, other.denominator);
+            int thisMultiple = gcd / this.denominator;
+            int otherMultiple = gcd / other.denominator;
+            return (this.numerator * thisMultiple) - (other.numerator * otherMultiple);
         }
     }
 
