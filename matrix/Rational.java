@@ -4,8 +4,8 @@ public class Rational implements Comparable<Rational> {
     private final int denominator;
     
     public Rational(String rational) throws NumberFormatException {
-        this(Integer.parseInt(rational.trim().substring(0, 1)), 
-             Integer.parseInt(rational.trim().substring(rational.length() - 1, rational.length())));
+        this(Integer.parseInt(rational.trim().split(" ")[0]), 
+             Integer.parseInt(rational.trim().split(" ")[rational.trim().split(" ").length -1]));
     }
         
     public Rational(int numerator) {
@@ -98,6 +98,29 @@ public class Rational implements Comparable<Rational> {
             int otherMultiple = gcd / other.denominator;
             return (this.numerator * thisMultiple) - (other.numerator * otherMultiple);
         }
+    }
+
+    /**
+     * Compares this Rational with the specified Object for equality
+	 * @param obj Object to which this Rational is to be compared
+     *  
+	 * @return true if and only if the specified Object is a Raional whose value is numerically equal to this BigInteger
+     **/
+    public boolean equals(Object obj) {
+        if (obj instanceof Rational) {
+            Rational other = (Rational) obj;
+            return this.numerator == other.numerator && this.denominator == other.denominator;
+        }
+        return false;
+    }
+    
+    /**
+     * Returns the hash code for this Rational
+     *  
+	 * @return hash code for this Rational
+     **/
+    public int hashCode() {
+        return new Integer(this.numerator).hashCode() ^ new Integer(this.denominator);
     }
 
     /**
