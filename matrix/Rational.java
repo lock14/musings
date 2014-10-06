@@ -14,7 +14,11 @@ public class Rational implements Comparable<Rational> {
 
     public Rational(int numerator, int denominator) {
         if (denominator == 0) {
-            throw new IllegalArgumentException("denominator cannot be zero: " + denominator);
+            throw new IllegalArgumentException("denominator cannot be zero: " + numerator  + " / " + denominator);
+        }
+        if (denominator < 0) {
+            denominator = -denominator;
+            numerator = -numerator;
         }
         if (numerator % denominator == 0) {
             numerator /= denominator;
@@ -34,15 +38,9 @@ public class Rational implements Comparable<Rational> {
 	 * @return this + other
      **/
     public Rational add(Rational other) {
-        int thisMultiple = 1;
-        int otherMultiple = 1;
-        int gcdDenom = this.denominator;
-        if (this.denominator != other.denominator) {
-            gcdDenom = gcd(this.denominator, other.denominator);
-            thisMultiple = gcdDenom / this.denominator;
-            otherMultiple = gcdDenom / other.denominator;
-        }
-        return new Rational((this.numerator * thisMultiple) + (other.numerator * otherMultiple), this.denominator);
+        int num = (this.numerator * other.denominator) + (this.denominator * other.numerator);
+        int denom = this.denominator * other.denominator;
+        return new Rational(num, denom);
     }
     
     /**
@@ -52,15 +50,7 @@ public class Rational implements Comparable<Rational> {
 	 * @return this - other
      **/
     public Rational subtract(Rational other) {
-        int thisMultiple = 1;
-        int otherMultiple = 1;
-        int gcdDenom = this.denominator;
-        if (this.denominator != other.denominator) {
-            gcdDenom = gcd(this.denominator, other.denominator);
-            thisMultiple = gcdDenom / this.denominator;
-            otherMultiple = gcdDenom / other.denominator;
-        }
-        return new Rational((this.numerator * thisMultiple) - (other.numerator * otherMultiple), this.denominator);
+        return add(new Rational(-other.numerator, other.denominator));
     }
 
     /**
@@ -84,20 +74,22 @@ public class Rational implements Comparable<Rational> {
     }
     
     /**
+     * Returns the recipricol of this Rational
+     *  
+	 * @return Rational b / a where a is the numerator and b is the denominator of this Rational
+     **/
+    public Rational reciprocal() {
+        return new Rational(this.denominator, this.numerator);
+    }
+     
+    /**
      * Compares two Rational object numerically
 	 * @param other Rational to which this Rational is to be compared
      *  
 	 * @return int < 0, 0, or int > 0 as this Rational is numerically less than, equal to, or greater than other
      **/
     public int compareTo(Rational other) {
-        if (this.denominator == other.denominator) {
-            return this.numerator - other.numerator;
-        } else {
-            int gcd = gcd(this.denominator, other.denominator);
-            int thisMultiple = gcd / this.denominator;
-            int otherMultiple = gcd / other.denominator;
-            return (this.numerator * thisMultiple) - (other.numerator * otherMultiple);
-        }
+        return (this.numerator * other.denominator) - (this.denominator * other.numerator);
     }
 
     /**
@@ -109,7 +101,7 @@ public class Rational implements Comparable<Rational> {
     public boolean equals(Object obj) {
         if (obj instanceof Rational) {
             Rational other = (Rational) obj;
-            return this.numerator == other.numerator && this.denominator == other.denominator;
+            return this.compareTo(other) == 0;
         }
         return false;
     }
@@ -120,7 +112,7 @@ public class Rational implements Comparable<Rational> {
 	 * @return hash code for this Rational
      **/
     public int hashCode() {
-        return new Integer(this.numerator).hashCode() ^ new Integer(this.denominator);
+        return this.toString().hashCode();
     }
 
     /**
@@ -129,7 +121,8 @@ public class Rational implements Comparable<Rational> {
 	 * @return "a / b" where a is the numerator and b is the denominator of this Rational
      **/
     public String toString() {
-        return "" + this.numerator + " / " + this.denominator;
+        String s = "" + this.numerator;
+        return (denominator == 1)? s : s + "/" + this.denominator;
     }
     
     /**
