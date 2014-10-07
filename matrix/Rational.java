@@ -39,7 +39,7 @@ public class Rational implements Comparable<Rational> {
     /**
      * Returns the numerator of this Rational
      *  
-	 * @return numerator of this Rational
+     * @return numerator of this Rational
      **/
     public int numerator() {
         return numerator;
@@ -48,7 +48,7 @@ public class Rational implements Comparable<Rational> {
     /**
      * Returns the denominator of this Rational
      *  
-	 * @return denominator of this Rational
+     * @return denominator of this Rational
      **/
     public int denominator() {
         return denominator;
@@ -57,7 +57,7 @@ public class Rational implements Comparable<Rational> {
     /**
      * Returns double form of this Rational
      * 
-	 * @return decimal (i.e double) form of this Raitonal
+     * @return decimal (i.e double) form of this Raitonal
      **/
     public double toDouble() {
         return this.numerator / denominator;
@@ -65,9 +65,9 @@ public class Rational implements Comparable<Rational> {
 
     /**
      * Returns a Rational whos value is this + other
-	 * @param other Rational to be added to this Rational
+     * @param other Rational to be added to this Rational
      *  
-	 * @return this + other
+     * @return this + other
      **/
     public Rational add(Rational other) {
         long numerator = (long) (this.numerator * other.denominator) + (this.denominator * other.numerator);
@@ -79,9 +79,9 @@ public class Rational implements Comparable<Rational> {
     
     /**
      * Returns a Rational whos value is this - other
-	 * @param other Rational to be subtracted from this Rational
+     * @param other Rational to be subtracted from this Rational
      *  
-	 * @return this - other
+     * @return this - other
      **/
     public Rational subtract(Rational other) {
         return add(new Rational(-other.numerator, other.denominator));
@@ -89,9 +89,9 @@ public class Rational implements Comparable<Rational> {
 
     /**
      * Returns a Rational whos value is this * other
-	 * @param other Rational to be multiplied by this Rational
+     * @param other Rational to be multiplied by this Rational
      *  
-	 * @return this * other
+     * @return this * other
      **/
     public Rational multiply(Rational other) {
         long numerator = (long) this.numerator * other.numerator;
@@ -103,9 +103,9 @@ public class Rational implements Comparable<Rational> {
 
     /**
      * Returns a Rational whos value is this / other
-	 * @param other Rational by which this Rational is to be divided
+     * @param other Rational by which this Rational is to be divided
      *  
-	 * @return this / other
+     * @return this / other
      **/
     public Rational divide(Rational other) {
         return multiply(other.reciprocol()); 
@@ -114,7 +114,7 @@ public class Rational implements Comparable<Rational> {
     /**
      * Returns the recipricol of this Rational
      *  
-	 * @return Rational b / a where a is the numerator and b is the denominator of this Rational
+     * @return Rational b / a where a is the numerator and b is the denominator of this Rational
      **/
     public Rational reciprocol() {
         return new Rational(this.denominator, this.numerator);
@@ -139,9 +139,9 @@ public class Rational implements Comparable<Rational> {
 
     /**
      * Compares two Rational object numerically
-	 * @param other Rational to which this Rational is to be compared
+     * @param other Rational to which this Rational is to be compared
      *  
-	 * @return int < 0, 0, or int > 0 as this Rational is numerically less than, equal to, or greater than other
+     * @return int < 0, 0, or int > 0 as this Rational is numerically less than, equal to, or greater than other
      **/
     public int compareTo(Rational other) {
         return (this.numerator * other.denominator) - (this.denominator * other.numerator);
@@ -149,9 +149,9 @@ public class Rational implements Comparable<Rational> {
 
     /**
      * Compares this Rational with the specified Object for equality
-	 * @param obj Object to which this Rational is to be compared
+     * @param obj Object to which this Rational is to be compared
      *  
-	 * @return true if and only if the specified Object is a Raional whose value is numerically equal to this BigInteger
+     * @return true if and only if the specified Object is a Raional whose value is numerically equal to this BigInteger
      **/
     public boolean equals(Object obj) {
         if (obj instanceof Rational) {
@@ -164,7 +164,7 @@ public class Rational implements Comparable<Rational> {
     /**
      * Returns the hash code for this Rational
      *  
-	 * @return hash code for this Rational
+     * @return hash code for this Rational
      **/
     public int hashCode() {
         return this.toString().hashCode();
@@ -173,7 +173,7 @@ public class Rational implements Comparable<Rational> {
     /**
      * Returns a String representation of this Rational.
      *  
-	 * @return "a / b" where a is the numerator and b is the denominator of this Rational
+     * @return "a / b" where a is the numerator and b is the denominator of this Rational
      **/
     public String toString() {
         String s = "" + this.numerator;
@@ -183,7 +183,7 @@ public class Rational implements Comparable<Rational> {
     /**
      * returns the fraction syntax in latex of this Rational
      *  
-	 * @return "\frac{a}{b}" where a is the numerator and b is the denominator of this Rational
+     * @return "\frac{a}{b}" where a is the numerator and b is the denominator of this Rational
      **/
     public String latexToString() {
         return "\\frac{" + this.numerator + "}{" + this.denominator + "}";        
@@ -194,6 +194,7 @@ public class Rational implements Comparable<Rational> {
             throw new IllegalStateException("int overflow has occured");
         }
     }
+
     private int gcd(int a, int b) {
         while (b != 0) {
             int temp = b;
