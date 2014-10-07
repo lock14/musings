@@ -19,7 +19,7 @@ public class Rational implements Comparable<Rational> {
 
     public Rational(int numerator, int denominator) {
         if (denominator == 0) {
-            throw new IllegalArgumentException("denominator cannot be zero: " + numerator  + " / " + denominator);
+            throw new IllegalArgumentException("denominator cannot be zero: " + numerator  + "/" + denominator);
         }
         if (denominator < 0) {
             denominator = -denominator;
