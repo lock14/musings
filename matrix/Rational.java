@@ -1,14 +1,14 @@
 /**
  * Immutable object to represent rational numbers.
  * Rational objects are always in reduced form.
- * Rational objects always have denominator greater than 1.
+ * Rational objects always have denominator greater than or equal to 1.
  * negative Rational objects are always represented with the numerator being negative.
  * Rationals are protected from integer overflow and will throw an IllegalStateException if it occurs
  *
  * @author Brian Bechtel
  * @version 1.0
  */
-public class Rational implements Comparable<Rational> {
+public class Rational implements Number<Rational>, Comparable<Rational> {
     public static final int IDENTITY_DENOMINATOR = 1;
     private final int numerator;
     private final int denominator;
@@ -25,13 +25,9 @@ public class Rational implements Comparable<Rational> {
             denominator = -denominator;
             numerator = -numerator;
         }
-        if (numerator % denominator == 0) {
-            numerator /= denominator;
-            denominator /= denominator;
-        } else if (denominator % numerator == 0) {
-            denominator /= numerator;
-            numerator /= numerator;
-        }
+        int gcd = gcd(numerator, denominator);
+        numerator /= gcd;
+        denominator /= gcd;
         this.numerator = numerator;
         this.denominator = denominator;
     }
@@ -114,7 +110,7 @@ public class Rational implements Comparable<Rational> {
     /**
      * Returns the recipricol of this Rational
      *  
-     * @return Rational b / a where a is the numerator and b is the denominator of this Rational
+     * @return Rational b/a where a is the numerator and b is the denominator of this Rational
      **/
     public Rational reciprocol() {
         return new Rational(this.denominator, this.numerator);
@@ -151,7 +147,7 @@ public class Rational implements Comparable<Rational> {
      * Compares this Rational with the specified Object for equality
      * @param obj Object to which this Rational is to be compared
      *  
-     * @return true if and only if the specified Object is a Raional whose value is numerically equal to this BigInteger
+     * @return true if and only if the specified Object is a Raional whose value is numerically equal to this Rational 
      **/
     public boolean equals(Object obj) {
         if (obj instanceof Rational) {
@@ -173,7 +169,7 @@ public class Rational implements Comparable<Rational> {
     /**
      * Returns a String representation of this Rational.
      *  
-     * @return "a / b" where a is the numerator and b is the denominator of this Rational
+     * @return "a/b" where a is the numerator and b is the denominator of this Rational
      **/
     public String toString() {
         String s = "" + this.numerator;
