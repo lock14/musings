@@ -64,6 +64,8 @@ public class Rational implements Number<Rational>, Comparable<Rational> {
      * @param other Rational to be added to this Rational
      *  
      * @return this + other
+     *  
+     * @throws BufferOverflowException - if the operation would result in integer overflow
      **/
     public Rational add(Rational other) {
         long numerator = (long) (this.numerator * other.denominator) + (this.denominator * other.numerator);
@@ -78,6 +80,8 @@ public class Rational implements Number<Rational>, Comparable<Rational> {
      * @param other Rational to be subtracted from this Rational
      *  
      * @return this - other
+     *  
+     * @throws BufferOverflowException - if the operation would result in integer overflow
      **/
     public Rational subtract(Rational other) {
         return add(new Rational(-other.numerator, other.denominator));
@@ -88,6 +92,8 @@ public class Rational implements Number<Rational>, Comparable<Rational> {
      * @param other Rational to be multiplied by this Rational
      *  
      * @return this * other
+     *  
+     * @throws BufferOverflowException - if the operation would result in integer overflow
      **/
     public Rational multiply(Rational other) {
         long numerator = (long) this.numerator * other.numerator;
@@ -102,6 +108,8 @@ public class Rational implements Number<Rational>, Comparable<Rational> {
      * @param other Rational by which this Rational is to be divided
      *  
      * @return this / other
+     *  
+     * @throws BufferOverflowException - if the operation would result in integer overflow
      **/
     public Rational divide(Rational other) {
         return multiply(other.reciprocol()); 
@@ -121,6 +129,8 @@ public class Rational implements Number<Rational>, Comparable<Rational> {
      * @param rational String representation of the Rational to be returned
      *  
      * @return Rational represented by the given String
+     *  
+     * @throws NumberFormatException - if the string does not contain a parsable Rational 
      **/
     public static Rational parseRational(String rational) throws NumberFormatException {
         String[] parts = rational.trim().split("/") ;
@@ -187,7 +197,7 @@ public class Rational implements Number<Rational>, Comparable<Rational> {
     
     private void checkOverflow(long value) {
         if (value > Integer.MAX_VALUE || value < Integer.MIN_VALUE) {
-            throw new IllegalStateException("int overflow has occured");
+            throw new BufferOverflowException("the requested operation would result in integer overflow");
         }
     }
 
