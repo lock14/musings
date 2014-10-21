@@ -3,7 +3,7 @@
  * Rational objects are always in reduced form.
  * Rational objects always have denominator greater than or equal to 1.
  * negative Rational objects are always represented with the numerator being negative.
- * Rationals are protected from integer overflow and will throw an IllegalStateException if it occurs
+ * Rationals are protected from integer overflow and will throw a BufferOverflowException if it occurs
  *
  * @author Brian Bechtel
  * @version 1.0
