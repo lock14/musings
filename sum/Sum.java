@@ -13,7 +13,9 @@ public class Sum {
         return result;
     }
 
-    public static double doubleSum(int outerStart, int outerEnd, int innerStart, int innerEnd, Functor function) {
+    public static double doubleSum(int outerStart, int outerEnd, 
+                                   int innerStart, int innerEnd, 
+                                   Functor function) {
         double result = 0.0;
         for (int i = outerStart; i <= outerEnd; i++) {
             for (int j = innerStart; j <= innerEnd; j++) {
@@ -23,7 +25,10 @@ public class Sum {
         return result;
     }
 
-    public static double tripleSum(int outerStart, int outerEnd, int middleStart, int middleEnd, int innerStart, int innerEnd, Functor function) {
+    public static double tripleSum(int outerStart, int outerEnd, 
+                                   int middleStart, int middleEnd, 
+                                   int innerStart, int innerEnd, 
+                                   Functor function) {
         double result = 0.0;
         for (int i = outerStart; i <= outerEnd; i++) {
             for (int j = middleStart; j <= middleEnd; j++) {
