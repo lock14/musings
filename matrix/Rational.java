@@ -1,3 +1,4 @@
+import java.nio.BufferOverflowException;
 /**
  * Immutable object to represent rational numbers.
  * Rational objects are always in reduced form.
@@ -6,7 +7,7 @@
  * Rationals are protected from integer overflow and will throw a BufferOverflowException if it occurs
  *
  * @author Brian Bechtel
- * @version 1.0
+ * @version 1.1
  */
 public class Rational implements Number<Rational>, Comparable<Rational> {
     public static final int IDENTITY_DENOMINATOR = 1;
@@ -173,7 +174,10 @@ public class Rational implements Number<Rational>, Comparable<Rational> {
      * @return hash code for this Rational
      **/
     public int hashCode() {
-        return this.toString().hashCode();
+        int hash = 23;
+        hash = (hash * 37) + numerator;
+        hash = (hash * 37) + denominator;
+        return hash;
     }
 
     /**
@@ -197,7 +201,7 @@ public class Rational implements Number<Rational>, Comparable<Rational> {
     
     private void checkOverflow(long value) {
         if (value > Integer.MAX_VALUE || value < Integer.MIN_VALUE) {
-            throw new BufferOverflowException("the requested operation would result in integer overflow");
+            throw new BufferOverflowException();
         }
     }
 
