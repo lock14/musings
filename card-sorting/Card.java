@@ -28,7 +28,22 @@ public class Card implements Comparable<Card> {
     }
 
     public String toString() {
-        return suit + ":" + rank;
+        return suit + ":" + modifiedRank(rank);
+    }
+
+    private String modifiedRank(int rank) {
+        switch (rank) {
+            case 1:
+                return "A";
+            case 11:
+                return "J";
+            case 12:
+                return "Q";
+            case 13:
+                return "K";
+            default:
+                return "" + rank;
+        }
     }
 
     private boolean validRank(int rank) {
