@@ -74,7 +74,6 @@ public class BigRational implements Number<BigRational>, Comparable<BigRational>
      *  
      * @return this + other
      *  
-     * @throws BufferOverflowException - if the operation would result in BigIntegereger overflow
      **/
     public BigRational add(BigRational other) {
         BigInteger numerator = this.numerator.multiply(other.denominator).add(this.denominator.multiply(other.numerator));
@@ -88,7 +87,6 @@ public class BigRational implements Number<BigRational>, Comparable<BigRational>
      *  
      * @return this - other
      *  
-     * @throws BufferOverflowException - if the operation would result in BigIntegereger overflow
      **/
     public BigRational subtract(BigRational other) {
         return add(new BigRational(other.numerator.negate(), other.denominator));
@@ -100,7 +98,6 @@ public class BigRational implements Number<BigRational>, Comparable<BigRational>
      *  
      * @return this * other
      *  
-     * @throws BufferOverflowException - if the operation would result in BigIntegereger overflow
      **/
     public BigRational multiply(BigRational other) {
         BigInteger numerator = this.numerator.multiply(other.numerator);
@@ -114,7 +111,6 @@ public class BigRational implements Number<BigRational>, Comparable<BigRational>
      *  
      * @return this / other
      *  
-     * @throws BufferOverflowException - if the operation would result in BigIntegereger overflow
      **/
     public BigRational divide(BigRational other) {
         return multiply(other.reciprocol()); 
