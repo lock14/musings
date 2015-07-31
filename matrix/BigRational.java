@@ -1,4 +1,5 @@
 import java.math.BigInteger; 
+import java.math.BigDecimal; 
 /**
  * Immutable object to represent rational numbers.
  * BigBigRational objects are always in reduced form.
@@ -60,12 +61,12 @@ public class BigRational implements Number<BigRational>, Comparable<BigRational>
     }
 
     /**
-     * Returns double form of this BigRational
+     * Returns BigDecimal form of this BigRational
      * 
-     * @return decimal (i.e double) form of this Raitonal
+     * @return decimal (i.e BigDecimal) form of this Raitonal
      **/
-    public double toDouble() {
-        return this.numerator.doubleValue() / denominator.doubleValue();
+    public BigDecimal toBigDecimal() {
+        return new BigDecimal(numerator).divide(new BigDecimal(denominator));
     }
 
     /**
