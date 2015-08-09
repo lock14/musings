@@ -62,10 +62,9 @@ public class Rational implements Number<Rational>, Comparable<Rational> {
 
     /**
      * Returns a Rational whos value is this + other
+     *
      * @param other Rational to be added to this Rational
-     *  
      * @return this + other
-     *  
      * @throws BufferOverflowException - if the operation would result in integer overflow
      **/
     public Rational add(Rational other) {
@@ -106,10 +105,9 @@ public class Rational implements Number<Rational>, Comparable<Rational> {
 
     /**
      * Returns a Rational whos value is this / other
+     *
      * @param other Rational by which this Rational is to be divided
-     *  
      * @return this / other
-     *  
      * @throws BufferOverflowException - if the operation would result in integer overflow
      **/
     public Rational divide(Rational other) {
@@ -127,10 +125,9 @@ public class Rational implements Number<Rational>, Comparable<Rational> {
 
     /**
      * Returns the Rational that is represented by the given String
+     *
      * @param rational String representation of the Rational to be returned
-     *  
      * @return Rational represented by the given String
-     *  
      * @throws NumberFormatException - if the string does not contain a parsable Rational 
      **/
     public static Rational parseRational(String rational) throws NumberFormatException {
@@ -146,8 +143,8 @@ public class Rational implements Number<Rational>, Comparable<Rational> {
 
     /**
      * Compares two Rational object numerically
+     *
      * @param other Rational to which this Rational is to be compared
-     *  
      * @return int < 0, 0, or int > 0 as this Rational is numerically less than, equal to, or greater than other
      **/
     public int compareTo(Rational other) {
@@ -156,8 +153,8 @@ public class Rational implements Number<Rational>, Comparable<Rational> {
 
     /**
      * Compares this Rational with the specified Object for equality
+     *
      * @param obj Object to which this Rational is to be compared
-     *  
      * @return true if and only if the specified Object is a Raional whose value is numerically equal to this Rational 
      **/
     public boolean equals(Object obj) {
