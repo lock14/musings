@@ -80,7 +80,7 @@ public class BigRational implements Comparable<BigRational> {
     }
 
     public BigRational(BigInteger numerator, BigInteger denominator) {
-        if (denominator.equals(ZERO)) {
+        if (denominator.equals(BigInteger.ZERO)) {
             throw new ArithmeticException("denominator cannot be zero: " 
                                               + numerator  + "/" + denominator);
         }
