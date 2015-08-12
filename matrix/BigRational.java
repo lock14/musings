@@ -26,15 +26,15 @@ public class BigRational implements Comparable<BigRational> {
     /**
      * The BigRational constant representing positive infinity (1/0) 
      **/
-    public static final BigRational POSITIVE_INFINITY = new BigRational("Infinity");
+    public static final BigRational POSITIVE_INFINITY = new BigRational("INF");
     /**
      * The BigRational constant representing positive infinity (-1/0) 
      **/
-    public static final BigRational NEGATIVE_INFINITY = new BigRational("-Infinity");
+    public static final BigRational NEGATIVE_INFINITY = new BigRational("-INF");
     /**
      * The BigRational constant representing 'not a number' (0/0) 
      **/
-    public static final BigRational NaN = new BigRational("NaN");
+    public static final BigRational NAN = new BigRational("NAN");
     
     private final BigInteger numerator;
     private final BigInteger denominator;
@@ -42,15 +42,15 @@ public class BigRational implements Comparable<BigRational> {
 
     private BigRational(String keyword) {
         switch (keyword) {
-            case "Infinity":
+            case "inf":
                 numerator = BigInteger.ONE;
                 denominator = BigInteger.ZERO;
                 break;
-            case "-Infinity":
+            case "-inf":
                 numerator = BigInteger.ONE.negate();
                 denominator = BigInteger.ZERO;
                 break;
-            case "NaN":
+            case "NAN":
                 numerator = BigInteger.ZERO;
                 denominator = BigInteger.ZERO;
                 break;
@@ -144,7 +144,7 @@ public class BigRational implements Comparable<BigRational> {
      *  
      **/
     public BigRational subtract(BigRational other) {
-        return add(new BigRational(other.numerator.negate(),other.denominator));
+        return add(other.negate());
     }
 
     /**
@@ -174,44 +174,58 @@ public class BigRational implements Comparable<BigRational> {
     /**
      * Returns the recipricol of this BigRational
      *  
-     * @return BigRational b/a where a is the numerator and b is the denominator
-     *         of this BigRational
+     * @return BigRational b/a where a is the numerator and b is the 
+     *         denominator of this BigRational
      **/
     public BigRational reciprocol() {
         return new BigRational(this.denominator, this.numerator);
     }
+    
+    /**
+     * Returns the negation of this BigRational
+     *
+     * @return BigRaitonal -a/b where a is the numerator and b is the 
+     *         denominator of this BigRational
+     **/
+    public BigRational negate() {
+        return new BigRaitonal(this.numerator.negate(), this.denominator);
+    }
 
-     /**
-      * Returns a BigRational whose value is this^n
-      *
-      * @return a BigRational whose value is (a/b)^n where a and b are 
-      *         the numerator and denominator of this BigRaitonal
-      **/
-     public BigRational pow(int n) {
-         BigInteger numeratorPow = null; 
-         BigInteger denominatorPow = null; 
-         if (n < 0) {
-             numeratorPow = this.denominator.pow(-n);
-             denominatorPow = this.numerator.pow(-n);
-         } else {
-             numeratorPow = this.numerator.pow(n);
-             denominatorPow = this.denominator.pow(n);
-         }
-         return new BigRational(numeratorPow, denominatorPow);
-     }
+    /**
+     * Returns a BigRational whose value is this^n
+     *
+     * @return a BigRational whose value is (a/b)^n where a and b are 
+     *         the numerator and denominator of this BigRaitonal
+     **/
+    public BigRational pow(int n) {
+        BigInteger numeratorPow = null; 
+        BigInteger denominatorPow = null; 
+        if (n < 0) {
+            numeratorPow = this.denominator.pow(-n);
+            denominatorPow = this.numerator.pow(-n);
+        } else {
+            numeratorPow = this.numerator.pow(n);
+            denominatorPow = this.denominator.pow(n);
+        }
+        return new BigRational(numeratorPow, denominatorPow);
+    }
 
     /**
      * Returns the BigRational that is represented by the given String
      *
      * @param rational String representation of the BigRational to be returned
      * @return BigRational represented by the given String
-     * @throws NumberFormatException if the string does not contain a parsable BigRational 
+     * @throws NumberFormatException if the string does not contain a parsable
+     *         BigRational 
      **/
-    public static BigRational parseBigRational(String rational) throws NumberFormatException {
+    public static BigRational parseBigRational(String rational) 
+                                                 throws NumberFormatException {
         String[] parts = rational.trim().split("/") ;
         if (parts.length == 2) {
-            BigInteger numerator = BigInteger.valueOf(Long.parseLong(parts[0].trim()));
-            BigInteger denominator = BigInteger.valueOf(Long.parseLong(parts[1].trim()));
+            long num = Long.parseLong(parts[0].trim());
+            long denom = Long.parseLong(parts[1].trim());
+            BigInteger numerator = BigInteger.valueOf(num);
+            BigInteger denominator = BigInteger.valueOf(denom);
             return new BigRational(numerator, denominator);
         } else {
             throw new NumberFormatException();
@@ -304,17 +318,22 @@ public class BigRational implements Comparable<BigRational> {
      * Compares two BigRational object numerically
      *
      * @param other BigRational to which this BigRational is to be compared
-     * @return int < 0, 0, or > 0 as this BigRational is numerically less than, equal to, or greater than other
+     * @return int < 0, 0, or > 0 as this BigRational is numerically less than,
+     *         equal to, or greater than other
      **/
     public int compareTo(BigRational other) {
-        return this.numerator.multiply(other.denominator).subtract(this.denominator.multiply(other.numerator)).intValue();
+        return this.numerator
+                   .multiply(other.denominator)
+                   .subtract(this.denominator.multiply(other.numerator))
+                   .intValue();
     }
 
     /**
      * Compares this BigRational with the specified Object for equality
      *
      * @param obj Object to which this BigRational is to be compared
-     * @return true if and only if the specified Object is a Raional whose value is numerically equal to this BigRational 
+     * @return true if and only if the specified Object is a Raional whose value
+     *         is numerically equal to this BigRational 
      **/
     public boolean equals(Object obj) {
         if (obj instanceof BigRational) {
@@ -345,8 +364,8 @@ public class BigRational implements Comparable<BigRational> {
      *         numerator of this BigRational.
      **/
     public String toString() {
-        String s = "" + this.numerator;
-        return (denominator.equals(BigInteger.ONE))? s : s + "/" + this.denominator;
+        String s = "" + numerator;
+        return (denominator.equals(BigInteger.ONE))? s : s + "/" + denominator;
     }
     
     /**
@@ -356,6 +375,6 @@ public class BigRational implements Comparable<BigRational> {
      *         of this BigRational
      **/
     public String latexToString() {
-        return "\\frac{" + this.numerator + "}{" + this.denominator + "}";        
+        return "\\frac{" + this.numerator + "}{" + this.denominator + "}";
     }
 }
