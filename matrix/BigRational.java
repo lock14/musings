@@ -267,8 +267,7 @@ public class BigRational implements Comparable<BigRational> {
     }
     
     /**
-     * Translates a double value into a BigRational, using the double's String
-     * representation provided by Double.toString(double).
+     * Translates a double value into a BigRational
      * 
      * @param val double value to be converted to a BigRational
      * @return A BigRatiional whose value is equal or aproximately equal 
@@ -276,31 +275,25 @@ public class BigRational implements Comparable<BigRational> {
      **/
     public static BigRational valueOf(double val) {
         String s = Double.toString(val);
-        System.out.println(s);
         if (s.equals("Infinity") || s.equals("-Infinity") || s.equals("NaN")) {
             throw new IllegalArgumentException("cannot convert double: " + val);
         }
+        return valueOf(BigDecimal.valueOf(val));
+    }
+
+    /**
+     * Translates a BigDecimal value into a BigRational
+     * 
+     * @param val BigDecimal value to be converted to a BigRational
+     * @return A BigRatiional whose value is equal or aproximately equal 
+     *         to the value of val.
+     **/
+    public static BigRational valueOf(BigDecimal val) {
+        String s = val.toPlainString();
         String[] parts = s.split("\\.");
         String num = parts[0];
         int exp = 0;
-        if(s.contains("E")) {
-            // in scientific notation
-            String[] parts2 = parts[1].split("E");
-            int n = Integer.parseInt(parts2[1]);
-            num = num.concat(parts2[0]);
-            if (n < 0) {
-                exp = -n + parts2[0].length();
-            } else {
-                n -= parts2[0].length();
-                if (n < 0) {
-                    exp = -n;
-                } else {
-                    for (int i = 0; i < n; i++) {
-                        num = num.concat("0");
-                    }
-                }
-            }
-        } else if (parts.length > 1) {
+        if (parts.length > 1) {
             exp = parts[1].length();
             num = num.concat(parts[1]);
         }
