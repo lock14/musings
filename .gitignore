@@ -1,0 +1,14 @@
+.classpath
+.externalToolBuilders/
+.idea
+.project
+.settings
+redeploy.sh
+src/main/webapp/WEB-INF/classes
+src/main/webapp/WEB-INF/lib
+target
+*.iml
+*out
+*.class
+/target/
+/bin/

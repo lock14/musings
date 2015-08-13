@@ -1,35 +1,27 @@
+import java.util.Comparator;
+
 public class Heap<E extends Comparable<E>> {
-    public static int DEFAULT_CAPACITY;
-    public static enum HeapType {MIN, MAX}
+    public static int DEFAULT_CAPACITY = 100;
     private Object[] heap;
     private int currentIndex;
-    private HeapCondition<E> heapCondition;
-    
+    private Comparator<E> comparator;
 
     public Heap() {
-        this(HeapType.MIN);
+        this(new Comparator<E>(){
+            public int compare(E o1, E o2) {
+                return o1.compareTo(o2);
+            }
+        });
     }
 
-    public Heap(HeapType type) {
-        this(DEFAULT_CAPACITY, type);
+    public Heap(Comparator<E> comparator) {
+        this(DEFAULT_CAPACITY, comparator);
     }
 
-    public Heap(int capacity, HeapType type) {
+    public Heap(int capacity, Comparator<E> comparator) {
         heap = new Object[capacity];
         currentIndex = 0;
-        if (type == HeapType.MIN) {
-            heapCondition = new HeapCondition<E>() {
-                public boolean condition(E child, E parent) {
-                    return parent.compareTo(child) < 0;
-                }
-            };
-        } else if(type == HeapType.MAX) {
-            heapCondition = new HeapCondition<E>() {
-                public boolean condition(E child, E parent) {
-                    return parent.compareTo(child) > 0;
-                }
-            };
-        }
+        comparator = comparator;
     }
 
     @SuppressWarnings("unchecked")
@@ -49,12 +41,12 @@ public class Heap<E extends Comparable<E>> {
         if (heap[index] != null) {
             int child1 = 2 * index + 1;
             int child2 = 2 * index + 2;
-            if (child1 >= heap.length && child2 >= heap.length) {
+            if (child1 >= heap.length) {
                 heap[index] = null;
             } else if (child1 < heap.length && child2 >= heap.length) {
                 heap[index] = heap[child1];
                 heap[child1] = null;
-            } else if (heapCondition.condition(((E) heap[child1]), ((E) heap[child2]))) {
+            } else if (heapCondition(((E) heap[child1]), ((E) heap[child2]))) {
                 heap[index] = heap[child2];
                 fixHeap(child2);
             } else {
@@ -76,13 +68,17 @@ public class Heap<E extends Comparable<E>> {
     private void enforceInvariant(int index) {
         if (index != 0) {
             int parent = (index - 1) / 2;
-            if (!heapCondition.condition(((E) heap[index]), ((E) heap[parent]))) {
+            if (!heapCondition(((E) heap[index]), ((E) heap[parent]))) {
                 E temp = (E) heap[parent];
                 heap[parent] = heap[index];
                 heap[index] = temp;
                 enforceInvariant(parent);
             }
         }
+    }
+
+    private boolean heapCondition(E e1, E e2) {
+        return !(comparator.compare(e1, e2) > 0);
     }
 
     private void resize() {
@@ -98,9 +94,5 @@ public class Heap<E extends Comparable<E>> {
             newHeap[i] = heap[i];
         }
         heap = newHeap;
-    }
-
-    private interface HeapCondition<E extends Comparable<E>> {
-        public boolean condition(E child, E parent);
     }
 }
