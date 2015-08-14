@@ -25,9 +25,9 @@ import java.math.BigDecimal;
  *       = P(A) + P(B) - P(A intersect C)
  *       = P(A) + P(B) - P(A)P(C)
  *
- *  Note: The set (A intersect B) is the same as (A intersect C) sinc if the 
- *        first two digits of an n digit string are '13', then event B = event C
- *        as the first digit of the (n - 1) string is a '3'. Meaning a '13' can
+ *  Note: The set (A intersect B) is the same as (A intersect C) since if the 
+ *        first two digits of an n digit string are '13', then event B = C as
+ *        the first digit of the (n - 1) string is a '3'. Meaning a '13' can
  *        only occur in (n - 2) digits. P(A intesect B) cannot be split up due 
  *        to events A and B being dependent. However, events A and C are 
  *        independent. So P(A intersect C) can be broken up int P(A)P(C).
@@ -39,10 +39,10 @@ import java.math.BigDecimal;
  *  so:
  *  F(n) = (1/100) + F(n - 1) - (1/100)F(n - 2)
  * 
- *  Finally, it should be noted that this is probability of any two digit number
- *  occuring in an n digit string so long as the two digits are not the same.
- *  For numbers like '11', '22', etc the reasoning for replacing (A intersect B)
- *  with (A interssect C) does not work.
+ *  Finally, it should be noted that this is the probability of any two digit 
+ *  number occuring in an n digit string so long as the two digits are not the 
+ *  same. For numbers like '11', '22', etc, the reasoning for replacing 
+ *  (A intersect B) with (A interssect C) does not work.
  */
 public class ProbabilityThirteenInStringLengthN {
     public static void main(String[] args) {
