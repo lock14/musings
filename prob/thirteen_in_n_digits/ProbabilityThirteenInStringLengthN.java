@@ -14,8 +14,8 @@ import java.math.BigDecimal;
  * Derivation:
  *  let N = the event a '13' occurs in a string of n digits
  *      A = the event a '13' occurs in the first two digits of a string
- *      B = the event a '13' occurs in a string of (n - 1) digits
- *      C = the event a '13' occurs in a string of (n - 2) digits
+ *      B = the event a '13' occurs in a string of (n-1) digits
+ *      C = the event a '13' occurs in a string of (n-2) digits
  *
  *  let 'union' denote set union, and 'intersect' denote set intersection
  *
@@ -27,17 +27,17 @@ import java.math.BigDecimal;
  *
  *  Note: The set (A intersect B) is the same as (A intersect C) since if the 
  *        first two digits of an n digit string are '13', then event B = C as
- *        the first digit of the (n - 1) string is a '3'. Meaning a '13' can
- *        only occur in (n - 2) digits. P(A intesect B) cannot be split up due 
+ *        the first digit of the (n-1) string is a '3'. Meaning a '13' can
+ *        only occur in (n-2) digits. P(A intesect B) cannot be split up due 
  *        to events A and B being dependent. However, events A and C are 
  *        independent. So P(A intersect C) can be broken up int P(A)P(C).
  *
  *  we know: 
  *       P(A) = 1/100
- *       P(B) = F(n - 1)
- *       P(C) = F(n - 2)
+ *       P(B) = F(n-1)
+ *       P(C) = F(n-2)
  *  so:
- *  F(n) = (1/100) + F(n - 1) - (1/100)F(n - 2)
+ *  F(n) = (1/100) + F(n-1) - (1/100)F(n-2), where F(0) = F(1) = 0
  * 
  *  Finally, it should be noted that this is the probability of any two digit 
  *  number occuring in an n digit string so long as the two digits are not the 
@@ -49,11 +49,7 @@ public class ProbabilityThirteenInStringLengthN {
         try {
             int n = Integer.parseInt(args[0]);
             if (n >= 0) {
-                String s = F(n).toString();
-                if (s.charAt(s.length() - 1) == '0' && s.charAt(s.length() - 2) != '.') {
-                    s = s.substring(0, s.length() - 1);
-                }
-                System.out.println(s);
+                System.out.println(F(n));
             } else {
                 System.err.println("Error: argument cannot be less than zero");
             }
