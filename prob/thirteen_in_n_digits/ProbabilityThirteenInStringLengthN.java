@@ -1,6 +1,6 @@
 import java.math.BigDecimal;
 
-/**
+/*
  * This small program calculates the probability a '13' will occur in a string
  * of n digits.
  *
@@ -60,11 +60,11 @@ public class ProbabilityThirteenInStringLengthN {
         }
     }
     
-    /** A naive implementation using the recursive nature of F(n) would result
-      * in terrible time complexity, similar to calculating the Fibinacci 
-      * sequence recursively. Therefore an interative approach results in a 
-      * much faster computation time.
-      **/
+    /* A naive implementation using the recursive nature of F(n) would result
+     * in O(2^n) time complexity, similar to calculating the Fibinacci sequence 
+     * recursively. Therefore an interative approach should be taken to achieve
+     * a much faster time complexity of O(n).
+     */
     public static BigDecimal F(int n) {
         BigDecimal zero = BigDecimal.valueOf(0.0);
         if (n == 0 || n == 1) {
