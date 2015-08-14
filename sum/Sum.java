@@ -1,8 +1,6 @@
 public class Sum {
     public interface Functor {
-        public double sum(int i);
-        public double doubleSum(int i, int j);
-        public double tripleSum(int i, int j, int k);
+        public double sum(int... indices);
     }
 
     public static double sum(int start, int end, Functor function) {
@@ -19,7 +17,7 @@ public class Sum {
         double result = 0.0;
         for (int i = outerStart; i <= outerEnd; i++) {
             for (int j = innerStart; j <= innerEnd; j++) {
-                result += function.doubleSum(i, j);
+                result += function.sum(i, j);
             }
         }
         return result;
@@ -33,7 +31,7 @@ public class Sum {
         for (int i = outerStart; i <= outerEnd; i++) {
             for (int j = middleStart; j <= middleEnd; j++) {
                 for (int k = innerStart; k <= innerEnd; k++) {
-                    result += function.tripleSum(i, j, k);
+                    result += function.sum(i, j, k);
                 }
             }
         }
