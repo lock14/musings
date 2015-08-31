@@ -37,9 +37,9 @@ public class SudokuMain {
             System.err.println(ex.getMessage());
         }
     }
-	
+    
     private static void populateBoard(SudokuGrid puzzle, Scanner input) throws IllegalStateException {
-		try {
+        try {
             for (int i = 0; i < 81; i++) {
                 if (input.hasNextInt()) {
                     puzzle.place(i, input.nextInt());
@@ -50,7 +50,7 @@ public class SudokuMain {
         } catch (Exception e) {
             throw new IllegalStateException("puzzle file is malformed.");
         }
-	}
+    }
 
     private static Scanner getScanner(String[] args) throws FileNotFoundException {
         if (args.length > 0 && args[args.length - 1].charAt(0) != '-') {

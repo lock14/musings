@@ -19,7 +19,7 @@ public class SudokuStdOutDisplayer implements SudokuDisplayer {
                     System.out.print("- ");
                 }
             }
-            System.out.println("|");	
+            System.out.println("|");    
         }
         System.out.println(separator());
     }
@@ -27,7 +27,7 @@ public class SudokuStdOutDisplayer implements SudokuDisplayer {
     public void displayMessage(String message) {
         System.out.println(message);
     }
-	
+    
     private String separator() {
         StringBuilder sb = new StringBuilder().append("+");
         for (int i = 0; i < SudokuGrid.BOARD_SIZE / 3 ; i++) {
