@@ -13,7 +13,8 @@ public class Bezout {
             System.out.println("+---+---------+---------+---------+---------+---------+---------+");
             do {
                 j++;
-            System.out.println("| " + j + " | " + pad(r(j)) + " | " + pad(r(j + 1)) + " | " + pad(q(j + 1)) + " | " + pad(r(j + 2)) + " | " + pad(s(j)) + " | " + pad(t(j)) + " |");
+            System.out.println("| " + j + " | " + pad(r(j)) + " | " + pad(r(j + 1)) + " | " + pad(q(j + 1)) + " | "
+                               + pad(r(j + 2)) + " | " + pad(s(j)) + " | " + pad(t(j)) + " |");
             } while (r(j + 2) != 0);
             System.out.println("+---+---------+---------+---------+---------+---------+---------+");
             System.out.println("gcd(" + a + ", " + b +"): " + r(j + 1));
@@ -25,7 +26,7 @@ public class Bezout {
             if (args.length < 2) {
                 System.err.println("argument must be an integer, argument submitted:  " + args[0]);
             } else {
-                System.err.println("both arguments must be integers, arguments submitted:  " + args[0] + ", " + args[1]);
+                System.err.println("arguments must be integers, arguments submitted:  " + args[0] + ", " + args[1]);
             }
         }
     }
