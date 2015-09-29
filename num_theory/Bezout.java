@@ -1,6 +1,3 @@
-import java.util.List;
-import java.util.ArrayList;
-
 public class Bezout {
     public static int a;
     public static int b;
