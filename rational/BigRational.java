@@ -350,8 +350,8 @@ public class BigRational implements Comparable<BigRational> {
      **/
     public int hashCode() {
         int hash = 23;
-        hash = (hash * 37) + numerator.hashCode();
-        hash = (hash * 37) + denominator.hashCode();
+        hash = (hash * 29) + numerator.hashCode();
+        hash = (hash * 31) + denominator.hashCode();
         return hash;
     }
 
