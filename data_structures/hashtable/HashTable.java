@@ -19,7 +19,6 @@ public class HashTable<K, V> {
         }
         int hash = fixHash(key.hashCode());
         HashNode<K, V> newNode = new HashNode<K, V>(key, value, hashTable[hash]);
-        newNode.next = hashTable[hash];
         hashTable[hash] = newNode;
         size++;
     }
