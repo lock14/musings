@@ -18,7 +18,15 @@ public class HashTable<K, V> {
             resize();
         }
         int hash = fixHash(key.hashCode());
-        hashTable[hash] = new HashNode<K, V>(key, value, hashTable[hash]);
+        HashNode<K, V> current = hashTable[hash];
+        if (current = null) {
+            hashTable[hash] = new HashNode<K, V>(key, value, hashTable[hash]);
+        } else {
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = new HashNode<K, V>(key, value, hashTable[hash]);
+        }
         size++;
     }
     
@@ -31,6 +39,7 @@ public class HashTable<K, V> {
                 if (key.equals(current.key)) {
                     return current.value;
                 }
+                current = current.next;
             }
         }
         return null;
