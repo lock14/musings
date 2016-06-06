@@ -1,6 +1,6 @@
 public class HashTable<K, V> {
     public static final int DEFAULT_SIZE = 100;
-    private static final double LOAD_FACTOR = 0.7;
+    private static final double MAX_LOAD_FACTOR = 0.7;
     private HashNode[] hashTable;
     private int size;
     
@@ -14,19 +14,13 @@ public class HashTable<K, V> {
     
     @SuppressWarnings("unchecked")    
     public void put(K key, V value) {
-        if (((double) size) / ((double) hashTable.length) >= LOAD_FACTOR) {
+        if (load_factor() > MAX_LOAD_FACTOR) {
             resize();
         }
         int hash = fixHash(key.hashCode());
-        HashNode<K, V> current = hashTable[hash];
-        if (current = null) {
-            hashTable[hash] = new HashNode<K, V>(key, value, hashTable[hash]);
-        } else {
-            while (current.next != null) {
-                current = current.next;
-            }
-            current.next = new HashNode<K, V>(key, value, hashTable[hash]);
-        }
+        HashNode<K, V> newNode = new HashNode<K, V>(key, value, hashTable[hash]);
+        newNode.next = hashTable[hash];
+        hashTable[hash] = newNode;
         size++;
     }
     
@@ -63,6 +57,21 @@ public class HashTable<K, V> {
         return false;
     }
 
+    public void clear() {
+        for (int i = 0; i < hashTable.length; i++) {
+            hashTable[i] = null;
+        }
+        size = 0;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public int size() {
+        return size;
+    }
+
     private int fixHash(int hash) {
         hash %= hashTable.length;
         if (hash < 0) {
@@ -83,6 +92,10 @@ public class HashTable<K, V> {
                 current = current.next;
             }
         }
+    }
+    
+    private double load_factor() {
+        return ((double) size) / ((double) hashTable.length);
     }
 
     private static final class HashNode<K, V> {
