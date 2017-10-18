@@ -57,7 +57,7 @@ import java.math.BigDecimal;
  * of the following python function with the output of this program. The python
  * function computes the proportion of strings that contain a '13' in an n length
  * string using brute force (e.g. it generates all possible strings and checks
- * each one). Fair warning it is quite slow as a result of this.
+ * each one). Fair warning, it is quite slow as a result of this.
  * 
  * def proportion_of_strings_containing_thirteen(n):
  *     return len([x for x in range(0, 10**n) if "13" in str(x)]) / 10**n
