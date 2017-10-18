@@ -60,7 +60,7 @@ import java.math.BigDecimal;
  * and checks each one). Fair warning, it is quite slow as a result of this.
  * 
  * def proportion_of_strings_containing_thirteen(n):
- *     return sum(1 for x in range(0, 10**n) if "13" in str(x)) / 10**n
+ *     return sum(1 for x in range(10**n) if "13" in str(x)) / 10**n
  */
 public class ProbabilityThirteenInStringLengthN {
     public static void main(String[] args) {
