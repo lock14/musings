@@ -79,8 +79,8 @@ public class ProbabilityThirteenInStringLengthN {
     }
     
     /* A naive implementation using the recursive nature of F(n) would result
-     * in O(2^n) time complexity, similar to calculating the Fibinacci sequence 
-     * recursively. Therefore an interative approach should be taken to achieve
+     * in O(2^n) time complexity, similar to calculating the Fibonacci sequence 
+     * recursively. Therefore, an iterative approach should be taken to achieve
      * a much faster time complexity of O(n).
      */
     public static BigDecimal F(int n) {
