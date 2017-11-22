@@ -25,7 +25,7 @@ public class ProgressBar {
      *
      **/
     public static void printProgressBar(int iteration, int total) {
-        printProgressBar(iteration, total, "", "", 2, 68, "#", ".");
+        printProgressBar(iteration, total, "", "", 2, 69, "#", ".");
     }
 
     /**
@@ -49,7 +49,8 @@ public class ProgressBar {
         String filled = String.join("", Collections.nCopies(filledLength, fill));
         String unfilled = String.join("", Collections.nCopies(length - filled.length(), unfill));
         String bar = filled + unfilled;
-        System.out.printf("%s [%s] %s%% %s\r", prefix, bar, percent, suffix);
+        int pad = 4 + decimals;
+        System.out.printf("\r%s [%s] %" + pad + "s%% %s", prefix, bar, percent, suffix);
         if (iteration == total) {
             System.out.println();
         }
