@@ -1,3 +1,12 @@
+import java.util.*;
+import java.util.stream.*;
+
+/**
+ * Generates primes using the Sieve of Eratosthenes
+ * implemented using the Java Streams API. This turned
+ * out to be significantly slower than the method used
+ * in NaivePrime.java
+ */
 public final class PrimeSieve {
     // make utility class constructor private
     private PrimeSieve() {}
