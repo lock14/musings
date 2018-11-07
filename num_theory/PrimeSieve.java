@@ -5,7 +5,10 @@ import java.util.stream.*;
  * Generates primes using the Sieve of Eratosthenes
  * implemented using the Java Streams API. This turned
  * out to be significantly slower than the method used
- * in NaivePrime.java
+ * in NaivePrime.java probably due to the janky way
+ * the predicate is being updated. So all in all this
+ * is not a very good way to generate primes though it
+ * was a fun experiment
  */
 public final class PrimeSieve {
     // make utility class constructor private
