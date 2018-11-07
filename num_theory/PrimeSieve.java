@@ -11,6 +11,11 @@ public final class PrimeSieve {
     // make utility class constructor private
     private PrimeSieve() {}
     
+    public static void main(String[] args) {
+        int n = Integer.parseInt(args[0]);
+        System.out.println(primes(n));
+    }
+    
     public static List<Integer> primes(int n) {
         return primes().limit(n).boxed().collect(Collectors.toList());
     }
