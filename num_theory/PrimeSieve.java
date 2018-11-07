@@ -13,7 +13,7 @@ public final class PrimeSieve {
                         .peek(p -> isPrime.combine(n -> n % p != 0));
     }
 
-    private static class MutableIntPredicate implements IntPredicate {
+    private static final class MutableIntPredicate implements IntPredicate {
         IntPredicate predicate = n -> true;
 
         @Override
