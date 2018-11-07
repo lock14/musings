@@ -20,8 +20,8 @@ public class NaivePrime {
     }
 
     public static boolean isPrime(int n) {
-        return IntStream.range(2, (int) (Math.sqrt(n) + 1))
-                        .filter(m -> n % m == 0)
-                        .count() == 0 && n > 1;
+        return n > 1 && IntStream.rangeClosed(2, (int) Math.sqrt(n))
+                                 .filter(m -> n % m == 0)
+                                 .count() == 0;
     }
 }
