@@ -3,7 +3,7 @@ public final class PrimeSieve {
     private PrimeSieve() {}
     
     public static List<Integer> primes(int n) {
-        return primes().boxed().limit(n).collect(Collectors.toList());
+        return primes().limit(n).boxed().collect(Collectors.toList());
     }
 
     public static IntStream primes() {
