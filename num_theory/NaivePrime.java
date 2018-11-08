@@ -4,7 +4,7 @@ import java.util.stream.*;
 /**
  * Generates primes using a naive method
  */
-public class NaivePrime {
+public final class NaivePrime {
     // make utility class constructor private
     private NaivePrime() {}
     
