@@ -5,6 +5,9 @@ import java.util.stream.*;
  * Generates primes using a naive method
  */
 public class NaivePrime {
+    // make utility class constructor private
+    private NaivePrime() {}
+    
     public static void main(String[] args) {
         int n = Integer.parseInt(args[0]);
         System.out.println(primes(n));
