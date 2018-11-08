@@ -18,7 +18,7 @@ public final class NaivePrime {
     }
 
     public static IntStream primes() {
-        return IntStream.iterate(2, i -> i + 1)
+        return IntStream.iterate(2, n -> n + 1)
                         .filter(NaivePrime::isPrime);
     }
 
