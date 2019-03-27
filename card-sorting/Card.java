@@ -12,19 +12,18 @@ public class Card implements Comparable<Card> {
     }
 
     public int rank() {
-        return this.rank;
+        return rank;
     }
 
     public Suit suit() {
-        return this.suit;
+        return suit;
     }
 
     public int compareTo(Card other) {
-        if (this.suit != other.suit) {
-            return this.suit.value() - other.suit.value();
-        } else {
+        if (this.rank != other.rank) {
             return this.rank - other.rank;
         }
+        return this.suit.ordinal() - other.suit.ordinal();
     }
 
     public String toString() {
@@ -51,18 +50,9 @@ public class Card implements Comparable<Card> {
     }
 
     public static enum Suit {
-        SPADES(4),
-        HEARTS(3),
-        DIAMONDS(2),
-        CLUBS(1);
-        private int value;
-        
-        private Suit(int value) {
-            this.value = value;
-        }
-
-        public int value() {
-            return this.value;
-        }
+        CLUBS,
+        DIAMONDS,
+        HEARTS,
+        SPADES
     }
 }

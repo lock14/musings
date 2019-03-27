@@ -1,55 +1,70 @@
 import java.util.Collections;
-import java.util.List;
-import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.IntStream;
+import java.util.stream.Collectors;
 
 public class CardSortTest {
     public static void main(String[] args) {
-        List<Card> deck = new ArrayList<Card>();
-        for(Card.Suit suit : Card.Suit.values()) {
-            for (int i = 1; i < 14; i++) {
-                deck.add(new Card(suit, i));
-            }
-        }
-        Comparator<Card> rankComparator = new Comparator<Card>() {
-                                                  public int compare(Card firstCard, Card secondCard) {
-                                                      return firstCard.rank() - secondCard.rank();
-                                                  }
-                                              };
+        List<Card> deck =  Arrays.stream(Card.Suit.values())
+                                 .flatMap(suit -> IntStream.range(1, 14)
+                                                           .mapToObj(i -> new Card(suit, i)))
+                                 .collect(Collectors.toList());
 
-        Comparator<Card> suitComparator = new Comparator<Card>() {
-                                                  public int compare(Card firstCard, Card secondCard) {
-                                                      return firstCard.suit().value() - secondCard.suit().value();
-                                                  }
-                                              };
-
+        // shuffle the deck
         Collections.shuffle(deck);
         System.out.println("shuffled deck:");
         System.out.println(deck);
         System.out.println();
 
-        Collections.sort(deck, rankComparator);
+        // sort by rank
+        Collections.sort(deck, Comparator.comparing(Card::rank));
         System.out.println("rank sort:");
         System.out.println(deck);
         System.out.println();
-
-        Collections.sort(deck, suitComparator);
+        
+        // then sort by suit
+        Collections.sort(deck, Comparator.comparing(Card::suit));
         System.out.println("suit sort:");
         System.out.println(deck);
         System.out.println();
         
+        // shuffle the deck again to try other order
         Collections.shuffle(deck);
         System.out.println("shuffled deck:");
         System.out.println(deck);
         System.out.println();
 
-        Collections.sort(deck, suitComparator);
+        // sort by suit
+        Collections.sort(deck, Comparator.comparing(Card::suit));
         System.out.println("suit sort:");
         System.out.println(deck);
         System.out.println();
 
-        Collections.sort(deck, rankComparator);
+        // then sort by rank
+        Collections.sort(deck, Comparator.comparing(Card::rank));
         System.out.println("rank sort:");
         System.out.println(deck);
+        System.out.println();
+
+        // shuffle the deck again to try natural order
+        Collections.shuffle(deck);
+        System.out.println("shuffled deck:");
+        System.out.println(deck);
+        System.out.println();
+
+        // sort once
+        Collections.sort(deck);
+        System.out.println("first sort:");
+        System.out.println(deck);
+        System.out.println();
+
+        // sort again
+        Collections.sort(deck);
+        System.out.println("second sort:");
+        System.out.println(deck);
+        System.out.println();
     }
 }
