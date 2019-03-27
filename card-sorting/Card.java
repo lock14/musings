@@ -3,12 +3,11 @@ public class Card implements Comparable<Card> {
     private final int rank;
 
     public Card(Suit suit, int rank) {
-        if (validRank(rank)) {
-            this.suit = suit;
-            this.rank = rank;
-        } else {
+        if (!validRank(rank)) {
             throw new IllegalArgumentException("Invalid rank: " + rank);
         }
+        this.suit = suit;
+        this.rank = rank;
     }
 
     public int rank() {
@@ -27,7 +26,7 @@ public class Card implements Comparable<Card> {
     }
 
     public String toString() {
-        return suit + ":" + modifiedRank(rank);
+        return modifiedRank(rank) + ":" + suit;
     }
 
     private String modifiedRank(int rank) {
