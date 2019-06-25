@@ -2,16 +2,17 @@
 # Declaration of variables
 CC = g++
 CC_FLAGS = -std=c++17 -Wall -Wextra -Werror -pedantic -pedantic-errors
+LINKER_FLAGS = 
 VALGRIND = valgrind
 
 # File names
-EXEC = run
+EXEC = exec
 SOURCES = $(wildcard *.cpp)
 OBJECTS = $(SOURCES:.cpp=.o)
 
 # Main target
 $(EXEC): $(OBJECTS)
-	$(CC) $(OBJECTS) -o $(EXEC)
+	$(CC) $(OBJECTS) $(LINKER_FLAGS) -o $(EXEC)
 
 # To obtain object files
 %.o: %.cpp
