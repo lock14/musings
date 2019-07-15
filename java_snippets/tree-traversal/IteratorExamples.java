@@ -22,12 +22,11 @@ public class IteratorExamples {
     // post: returns the kth smallest item in the tree if it exists
     public static <E extends Comparable<? super E>> Optional<E> findKthSmallest(TreeNode<E> root, int k) {
         Iterator<E> itr = new InOrderIterator<>(root);
-        E data = null;
-        while (itr.hasNext() && k > 0) {
-            data = itr.next();
+        while (itr.hasNext() && k > 1) {
+            itr.next();
             k--;
         }
-        return (k == 0) ? Optional.ofNullable(data) : Optional.empty();
+        return Optional.ofNullable(k == 1 ? itr.next() : null);
     }
 
     public static <E extends Comparable<? super E>> TreeNode<E> createBalanced(E[] a) {
