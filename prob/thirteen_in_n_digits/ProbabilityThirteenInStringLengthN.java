@@ -6,61 +6,72 @@ import java.math.BigDecimal;
  * This small program calculates the probability a '13' will occur in a string
  * of n digits.
  *
- * Asumptions: 
- *  1. only digits 0-9 can occur in the string.
- *  2. each digit has an equal likelyhood of showing up in each position of the
- *     the string. i.e. for a digit n element of {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
- *     P_i(n) = 1/10 for the ith digit in the string. 
+ * Problem Description:
+ *  We consider an n digit string, S, indexed from 0 to n-1. The ith digit, S[i],
+ *  is chosen uniformly at random from the alphabet {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}.
  *
- * we will try to forumlate a function F(n) that calculates the probabilty of a
- * '13' occuring in a string of n digits.
+ *  Our goal is to forumlate a function, F(n), that calculates the probabilty of a
+ * '13' occuring between the indices 0 and n-1 of S.
  *
  * Derivation:
- *  let N = the event a '13' occurs in a string of n digits
- *      A = the event a '13' occurs in the first two digits of a string
- *      B = the event a '13' occurs in a string of (n-1) digits
- *      C = the event a '13' occurs in a string of (n-2) digits
+ *  let N = the event a '13' occurs between indices 0...n-1 of a string
+ *      A = the event a '13' occurs at indices 0 and 1 of a string
+ *      B = the event a '13' occurs between indices 1...n-1 of a string
+ *      C = the event a '13' occurs between indices 2...n-1 of a string
  *
- *  let 'union' denote set union, and 'intersect' denote set intersection
+ *  let 'v' denote set union, and '^' denote set intersection
  *
  *  F(n) = P(N)
- *       {a '13' occurs in the first 2 digits or in the next n-1 digits}
- *       = P(A union B)
- *       {probability of the union of two events}
- *       = P(A) + P(B) - P(A intersect B)
- *       {B can be substitued for C. see note for justification}
- *       = P(A) + P(B) - P(A intersect C)
- *       {probability of the intersection of independent events}
- *       = P(A) + P(B) - P(A)P(C)         
+ *       = P(A v B) // by analysis
+ *       = P(A) + P(B) - P(A ^ B) // Addition Rule
+ *       = P(A) + P(B) - P(A)P(B | A) // Multiplication Rule
+ *       = P(A) + P(B) - P(A)P(C | A) // P(B | A) = P(C | A). See Note for details
+ *       = P(A) + P(B) - P(A)P(C)     // A and C are independent, thus P(C | A) = P(C)    
  *
- *  Note: The set (A intersect B) is the same as (A intersect C) since if the 
- *        first two digits of an n digit string are '13', then event B = C as
- *        the first digit of the (n-1) string is a '3'. Meaning a '13' can
- *        only occur in (n-2) digits. P(A intesect B) cannot be split up due 
- *        to events A and B being dependent. However, events A and C are 
- *        independent. So P(A intersect C) can be broken up into P(A)P(C).
+ *  Note: P(B | A) is the same as P(C | A). If A occurs, then index 0 is a '1'
+ *        and index 1 is a '3'. Therefore event B = C as
+ *        the digit at index 1 is a '3', meaning a '13' can
+ *        only occur between indices 2...n-1.
  *
- *  we know: 
+ *  From analysis we can derive: 
  *       P(A) = 1/10 * 1/10 = 1/100
  *       P(B) = F(n-1)
  *       P(C) = F(n-2)
  *
  *  Therefore:
- *  F(n) = (1/100) + F(n-1) - (1/100)F(n-2), where F(0) = F(1) = 0
+ *  F(n) = (1/100) + F(n-1) - (1/100)F(n-2)
+ *       = F(n-1) + 1/100 - F(n-2)/100
+ *       = F(n-1) + (1 - F(n-2))/100, where F(0) = F(1) = 0
  * 
  * Finally, it should be noted that this is the probability of any two digit 
- * number occuring in an n digit string so long as the two digits are not the 
- * same. For numbers like '11', '22', etc, the reasoning for replacing 
- * (A intersect B) with (A interssect C) does not work.
+ * number occuring in an n digit string so long as the two digits distinct.
+ * For numbers like '11', '22', etc, the reasoning for replacing 
+ * P(B | A) with P(C | A) does not hold.
  *
  * If you are doubting the correctness of this derivation, you can compare the
  * output of the following python function with the output of this program. The
  * python function computes the proportion of strings that contain a '13' in an
- * n length string using brute force (i.e. it generates all possible strings
- * and checks each one). Fair warning, it is quite slow as a result of this.
+ * n length string using brute force. It can only compute the proportions for
+ * n <= 9 in a reasonable amount of time as result of its time complexity.
  * 
  * def proportion_of_strings_containing_thirteen(n):
  *     return sum(1 for x in range(10**n) if "13" in str(x)) / 10**n
+ * 
+ * Here is a table for the brute force solution up n=10
+ * +-----+--------------+
+ * |  N  |     P(N)     |
+ * +-----+--------------+
+ * |  0  | 0            |
+ * |  1  | 0            |
+ * |  2  | 0.01         |
+ * |  3  | 0.02         |
+ * |  4  | 0.0299       |
+ * |  5  | 0.0397       |
+ * |  6  | 0.049401     |
+ * |  7  | 0.059004     |
+ * |  8  | 0.06850999   |
+ * |  9  | 0.07791995   |
+ * | 10  | 0.0872348501 |
  */
 public class ProbabilityThirteenInStringLengthN {
     public static void main(String[] args) {
