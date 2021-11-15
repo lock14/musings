@@ -3,7 +3,7 @@ import java.math.BigDecimal;
 /* 
  * @author Brian Bechtel
  * 
- * def proportion_of_strings_containing_thirteen(n):
+ * def proportion_of_strings_containing_eleven(n):
  *     return sum(1 for x in range(10**n) if "11" in str(x)) / 10**n
  * 
  * Here is a table for the brute force solution up n=10
