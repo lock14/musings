@@ -2,7 +2,54 @@ import java.math.BigDecimal;
 
 /* 
  * @author Brian Bechtel
+ *
+ * This small program calculates the probability an '11' will occur in a string
+ * of n digits.
+ *
+ * Problem Description:
+ * We consider an n digit string, S, indexed from 0 to n-1. The ith digit, S[i],
+ * is chosen uniformly at random from the alphabet {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}.
+ *
+ * Our goal is to forumlate a function, F(n), that calculates the probabilty of an
+ * '11' occuring between the indices 0 and n-1 of S.
+ *
+ * Derivation:
+ * let N = the event an '11' occurs between indices 0...n-1
+ *     A = the event an '11' occurs at indices 0 and 1
+ *     B = the event an '11' occurs between indices 1...n-1
+ *     C = the event a '1' occurs at index 2
+ *     D = the event an '11' occurs at index between indices 3...n-1
+ *
+ * let 'v' denote set union, and '^' denote set intersection
+ *
+ * F(n) = P(N)
+ *      = P(A v B) // by analysis
+ *      = P(A) + P(B) - P(A ^ B) // Addition Rule
+ *      = P(A) + P(B) - P(A ^ (C v D)) // C v D = B
+ *      = P(A) + P(B) - P((A ^ C) v (A ^ D)) // Distribution of set intersection over union
+ *      = P(A) + P(B) - (P(A ^ C) + P(A ^ D) - P(A ^ C ^ D)) // Addition Rule
+ *      = P(A) + P(B) - P(A ^ C) - P(A ^ D) + P(A ^ C ^ D) // Simplification
+ *      = P(A) + P(B) - P(A)P(C) - P(A)(D) + P(A)P(C)P(D) // Events A, C, and D are all independent from each other
+ *
+ * From analysis we can derive: 
+ *      P(A) = 1/10 * 1/10 = 1/100
+ *      P(B) = F(n-1)
+ *      P(C) = 1/10
+ *      P(D) = F(n-3)
+ *
+ * Therefore:
+ * F(n) = 1/100 + F(n-1) - 1/1000 - 1/100F(n-3) + 1/1000F(n-3)
+        = 1/100 + F(n-1) - 1/1000 - 9/1000F(n-3), where F(0) = F(1) = 0
  * 
+ * Finally, it should be noted that this is the probability of any two digit 
+ * number occuring in an n digit string so long as the two digits are the same.
+ *
+ * If you are doubting the correctness of this derivation, you can compare the
+ * output of the following python function with the output of this program. The
+ * python function computes the proportion of strings that contain a '11' in an
+ * n length string using brute force. It can only compute the proportions for
+ * n <= 9 in a reasonable amount of time as result of its time complexity.
+ *
  * def proportion_of_strings_containing_eleven(n):
  *     return sum(1 for x in range(10**n) if "11" in str(x)) / 10**n
  * 
