@@ -25,7 +25,9 @@ import java.math.BigDecimal;
  * F(n) = P(N)
  *      = P(A v B) // by analysis
  *      = P(A) + P(B) - P(A ^ B) // Addition Rule
- *      = P(A) + P(B) - P(A ^ (C v D)) // C v D = B
+ *      = P(A) + P(B) - P(A)P(B | A) // Multiplication Rule
+ *      = P(A) + P(B) - P(A)P(C v D | A) // C v D, given A = B, given A
+ *      = P(A) + P(B) - P(A ^ (C v D)) // Multiplication Rule
  *      = P(A) + P(B) - P((A ^ C) v (A ^ D)) // Distribution of set intersection over union
  *      = P(A) + P(B) - (P(A ^ C) + P(A ^ D) - P(A ^ C ^ D)) // Addition Rule
  *      = P(A) + P(B) - P(A ^ C) - P(A ^ D) + P(A ^ C ^ D) // Simplification
