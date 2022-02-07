@@ -41,7 +41,7 @@ import java.math.BigDecimal;
  *
  * Therefore:
  * F(n) = 1/100 + F(n-1) - 1/1000 - 1/100F(n-3) + 1/1000F(n-3)
-        = 1/100 + F(n-1) - 1/1000 - 9/1000F(n-3), where F(0) = F(1) = 0
+        = 1/100 + F(n-1) - 1/1000 - 9/1000F(n-3), where F(0) = F(1) = 0, and F(2) = 1/100
  * 
  * Finally, it should be noted that this is the probability of any two digit 
  * number occuring in an n digit string so long as the two digits are the same.
@@ -99,15 +99,15 @@ public class ProbabilityElevenInStringLengthN {
         BigDecimal nMinusThree = BigDecimal.ZERO;
         BigDecimal nMinusTwo = BigDecimal.ZERO;
         BigDecimal nMinusOne = BigDecimal.ZERO;
-        BigDecimal result = BigDecimal.ZERO;
-        /* want to do n-1 interations. i.e. n=0 or n=1 requires 0 iterations,
-         * n=2 requires 1 iterations, n=3 requires 2 iterations etc. */
-        for (int i = 0; i < (n - 1); i++) {
+        BigDecimal result = oneHundreth;
+        /* want to do n-2 interations. i.e. n=0 or n=1 requires 0 iterations,
+         * n=2 requires 0 iterations, n=3 requires 1 iterations etc. */
+        for (int i = 0; i < (n - 2); i++) {
             nMinusThree = nMinusTwo;
             nMinusTwo = nMinusOne;
             nMinusOne = result;
             result = oneHundreth.add(nMinusOne)
-                                .subtract(i > 0 ? oneThousandth : BigDecimal.ZERO)
+                                .subtract(oneThousandth)
                                 .subtract(nine.multiply(nMinusThree).multiply(oneThousandth))
                                 .stripTrailingZeros();
         }
