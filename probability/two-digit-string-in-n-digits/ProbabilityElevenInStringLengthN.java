@@ -76,7 +76,9 @@ public class ProbabilityElevenInStringLengthN {
         try {
             int n = Integer.parseInt(args[0]);
             if (n >= 0) {
-                System.out.printf("There is a %.2f%% chance an '11' occurs in string of length %d %n", F(n).multiply(BigDecimal.TEN.pow(2)), n);
+                BigDecimal probability = F(n);
+                System.out.printf("True probability %f%n", probability);
+                System.out.printf("There is a %.2f%% chance an '11' occurs in string of length %d %n", probability.multiply(BigDecimal.TEN.pow(2)), n);
             } else {
                 System.err.println("Error: argument cannot be less than zero");
             }
