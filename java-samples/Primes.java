@@ -3,6 +3,21 @@ import java.util.stream.IntStream;
 
 public class Primes {
 
+   public static void main(String[] args) {
+      try {
+        int k = Integer.parseInt(args[0]);
+        if (k > 105097564) {
+            System.err.println(k + " is too large. Maximum value allowed: 105097564");
+            System.exit(1);
+        }
+        firstKPrimes(k).forEach(System.out::println);
+      } catch (NumberFormatException e) {
+        System.err.println(args[0] + " is not an integer");
+      } catch (IndexOutOfBoundsException e) {
+        System.err.println("an interger argument must be provided");
+      }
+   }
+
    public static IntStream firstKPrimes(int k) {
       if (k < 1) {
          return IntStream.empty();
