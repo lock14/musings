@@ -40,6 +40,9 @@ public class Primes {
       return primes.stream();
    }
 
+   /**
+    * Inverse of the PI function: https://en.wikipedia.org/wiki/Prime-counting_function
+    */
    private static double piInverse(double y) {
       double xOld = 0;
       double x = y * Math.log(y);
