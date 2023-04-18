@@ -15,6 +15,7 @@ public class Primes {
       if (n < 0) {
          return IntStream.empty();
       }
+      // use https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
       BitSet primes = new BitSet(n);
       // unset bit means prime, set bit means composite
       if (n > 2) {
