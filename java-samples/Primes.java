@@ -6,6 +6,8 @@ public class Primes {
    public static void main(String[] args) {
       try {
         int k = Integer.parseInt(args[0]);
+        // TODO: it seems inputs larger that 99940774 don't genereate output.
+        //       This needs some investigating as to why.
         if (k > 105097564) {
             System.err.println(k + " is too large. Maximum value allowed: 105097564");
             System.exit(1);
