@@ -41,7 +41,7 @@ import java.math.BigDecimal;
  *
  * Therefore:
  * F(n) = 1/100 + F(n-1) - 1/1000 - 1/100F(n-3) + 1/1000F(n-3)
-        = 1/100 + F(n-1) - 1/1000 - 9/1000F(n-3), where F(0) = F(1) = 0, and F(2) = 1/100
+        = 9/1000 + F(n-1) - 9/1000F(n-3), where F(0) = F(1) = 0, and F(2) = 1/100
  * 
  * Finally, it should be noted that this is the probability of any two digit 
  * number occuring in an n digit string so long as the two digits are the same.
@@ -95,23 +95,25 @@ public class ProbabilityElevenInStringLengthN {
      * a much faster time complexity of O(n).
      */
     public static BigDecimal F(int n) {
-        BigDecimal oneHundreth = BigDecimal.ONE.divide(BigDecimal.TEN.pow(2));
-        BigDecimal oneThousandth = BigDecimal.ONE.divide(BigDecimal.TEN.pow(3));
-        BigDecimal nine = BigDecimal.TEN.subtract(BigDecimal.ONE);
+        if (n < 2) {
+            return BigDecimal.ZERO;
+        }
+        BigDecimal nineThousandths = BigDecimal.TEN.subtract(BigDecimal.ONE)
+                                               .divide(BigDecimal.TEN.pow(3));
         BigDecimal nMinusThree = BigDecimal.ZERO;
         BigDecimal nMinusTwo = BigDecimal.ZERO;
         BigDecimal nMinusOne = BigDecimal.ZERO;
-        BigDecimal result = oneHundreth;
-        /* want to do n-2 interations. i.e. n=0 or n=1 requires 0 iterations,
-         * n=2 requires 0 iterations, n=3 requires 1 iterations etc. */
+        BigDecimal result = BigDecimal.ONE.divide(BigDecimal.TEN.pow(2));
+        /* want to do n-2 interations. i.e. n=3 requires 1 iteration,
+         * n=4 requires 2 iterations,  etc.
+         */
         for (int i = 0; i < (n - 2); i++) {
             nMinusThree = nMinusTwo;
             nMinusTwo = nMinusOne;
             nMinusOne = result;
-            result = oneHundreth.add(nMinusOne)
-                                .subtract(oneThousandth)
-                                .subtract(nine.multiply(nMinusThree).multiply(oneThousandth))
-                                .stripTrailingZeros();
+            result = nineThousandths.add(nMinusOne)
+                                    .subtract(nineThousandths.multiply(nMinusThree))
+                                    .stripTrailingZeros();
         }
         return result;
     }

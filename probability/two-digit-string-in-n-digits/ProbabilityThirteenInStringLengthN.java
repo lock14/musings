@@ -102,7 +102,8 @@ public class ProbabilityThirteenInStringLengthN {
         BigDecimal nMinusOne = BigDecimal.ZERO;
         BigDecimal result = BigDecimal.ZERO; 
         /* want to do n-1 interations. i.e. n=0 or n=1 requires 0 iterations,
-         * n=2 requires 1 iterations, n=3 requires 2 iterations etc. */
+         * n=2 requires 1 iterations, n=3 requires 2 iterations etc.
+         */
         for (int i = 0; i < (n - 1); i++) {
             nMinusTwo = nMinusOne;
             nMinusOne = result;
