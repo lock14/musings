@@ -70,6 +70,7 @@ import java.math.BigDecimal;
  * |  8  | 0.06315481   |
  * |  9  | 0.071743159  |
  * | 10  | 0.080252776  |
+ * +-----+--------------+
  */
 public class ProbabilityElevenInStringLengthN {
     public static void main(String[] args) {

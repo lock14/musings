@@ -72,6 +72,7 @@ import java.math.BigDecimal;
  * |  8  | 0.06850999   |
  * |  9  | 0.07791995   |
  * | 10  | 0.0872348501 |
+ * +-----+--------------+
  */
 public class ProbabilityThirteenInStringLengthN {
     public static void main(String[] args) {
