@@ -10,7 +10,7 @@ import java.math.BigDecimal;
  *  We consider an n digit string, S, indexed from 0 to n-1. The ith digit, S[i],
  *  is chosen uniformly at random from the alphabet {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}.
  *
- *  Our goal is to forumlate a function, F(n), that calculates the probabilty of a
+ *  Our goal is to formulate a function, F(n), that calculates the probabilty of a
  * '13' occuring between the indices 0 and n-1 of S.
  *
  * Derivation:
