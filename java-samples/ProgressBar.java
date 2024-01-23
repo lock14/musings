@@ -1,15 +1,30 @@
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-public class ProgressBar {
-    public static void main(String[] args) {
-        // demo the progress bar
-        int n = 1000;
-        for (int i = 0; i < n; i++) {
-            try {
-                Thread.sleep(2);
-            } catch (Exception e) {};
-            printProgressBar(i, n-1);
-        }
+public class ProgressBar<T> implements Iterable<T> {
+
+    private final Iterator<T> iterator;
+    private final int size;
+
+    public ProgressBar(Collection<T> collection) {
+        this(collection.iterator(), collection.size());
+    }
+
+    public ProgressBar(Iterator<T> iterator, int size) {
+        this.iterator = iterator;
+        this.size = size;
+    }
+
+    public static <T> ProgressBar<T> of(Collection<T> c) {
+        return new ProgressBar<>(c);
+    }
+
+    public static <T> ProgressBar<T> of(Iterator<T> iterator, int size) {
+        return new ProgressBar<>(iterator, size);
     }
 
     /**
@@ -53,6 +68,47 @@ public class ProgressBar {
         System.out.printf("\r%s [%s] %" + pad + "s%% %s", prefix, bar, percent, suffix);
         if (iteration == total) {
             System.out.println();
+        }
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new ProgressIterator();
+    }
+
+    private final class ProgressIterator implements Iterator<T> {
+        private int iteration;
+
+        public ProgressIterator() {
+            iteration = 0;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return ProgressBar.this.iterator.hasNext();
+        }
+
+        @Override
+        public T next() {
+            T item = ProgressBar.this.iterator.next();
+            printProgressBar(++iteration, ProgressBar.this.size);
+            return item;
+        }
+    }
+
+    public static void main(String[] args) {
+        // demo the progress bar
+        int limit = 1000;
+        List<Integer> integers = IntStream.iterate(0, n -> n + 1)
+            .limit(limit)
+            .boxed()
+            .collect(Collectors.toList());
+        for (int i : ProgressBar.of(integers)) {
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }
