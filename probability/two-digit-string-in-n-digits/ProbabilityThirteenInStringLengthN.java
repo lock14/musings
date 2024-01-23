@@ -109,7 +109,7 @@ public class ProbabilityThirteenInStringLengthN {
             nMinusTwo = nMinusOne;
             nMinusOne = result;
             result = oneHundreth.add(nMinusOne)
-                     .subtract(oneHundreth.multiply(nMinusTwo));
+                                .subtract(oneHundreth.multiply(nMinusTwo));
         }
         return result;
     }
