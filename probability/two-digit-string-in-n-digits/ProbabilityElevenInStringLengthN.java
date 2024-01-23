@@ -41,7 +41,7 @@ import java.math.BigDecimal;
  *
  * Therefore:
  * F(n) = 1/100 + F(n-1) - 1/1000 - 1/100F(n-3) + 1/1000F(n-3)
-        = 9/1000 + F(n-1) - 9/1000F(n-3), where F(0) = F(1) = 0, and F(2) = 1/100
+ *      = 9/1000 + F(n-1) - 9/1000F(n-3), where F(0) = F(1) = 0, and F(2) = 1/100
  * 
  * Finally, it should be noted that this is the probability of any two digit 
  * number occuring in an n digit string so long as the two digits are the same.
